@@ -30,7 +30,7 @@ $ kubectl apply -f ./app-v2.yaml
 # In a different terminal you can check that requests are responding with version 1
 $ while sleep 0.1; do curl "${ingres_endopint}/andytest/"; done
 
-# Create a canary ingress in order to split traffic: 90% to v1, 10% to v2
+# Create a canary ingress in order to split traffic: 90% to v1（CAS 6.0.0）, 10% to v2（CAS 7.0.0）
 $ kubectl apply -f ./ingress-v2-canary.yaml
 
 # Now you should see that the traffic is being splitted
@@ -39,8 +39,10 @@ $ while sleep 0.1; do curl "${ingres_endopint}/andytest/"; done
 # When you are happy, delete the canary ingress
 $ kubectl delete -f ./ingress-v2-canary.yaml
 
-# Then finish the rollout, set 100% traffic to version 2
+# Then finish the rollout, set 100% traffic to version 2（CAS 7.0.0）
 $ kubectl apply -f ./ingress-v2.yaml
+
+# Shutdown CAS 6.0.0 resources
 ```
 
 ### Cleanup
