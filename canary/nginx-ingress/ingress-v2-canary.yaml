@@ -4,12 +4,20 @@ metadata:
   name: my-cas-canary
   namespace: andy-test
   labels:
-    app: my-cas
+    app: my-cas-v2
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     # Enable canary and send 10% of traffic to version 2
     nginx.ingress.kubernetes.io/canary: "true"
     nginx.ingress.kubernetes.io/canary-weight: "10"
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/affinity-mode: "persistent"
+    nginx.ingress.kubernetes.io/session-cookie-secure: "true"
+    nginx.ingress.kubernetes.io/session-cookie-name: "POCCOOKIE"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "86400"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "86400"
+    nginx.ingress.kubernetes.io/session-cookie-samesite: "None"
+    nginx.ingress.kubernetes.io/session-cookie-conditional-samesite-none: "true"
 spec:
   ingressClassName: os-nginx
   rules:

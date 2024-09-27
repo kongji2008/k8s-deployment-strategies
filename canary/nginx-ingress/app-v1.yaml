@@ -4,15 +4,14 @@ metadata:
   name: my-cas-v1
   namespace: andy-test
   labels:
-    app: my-cas
+    app: my-cas-v1
 spec:
   ports:
   - name: http
     port: 80
     targetPort: http
   selector:
-    app: my-cas
-    version: v6.0.0
+    app: my-cas-v1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -20,21 +19,19 @@ metadata:
   name: my-cas-v1
   namespace: andy-test
   labels:
-    app: my-cas
+    app: my-cas-v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-cas
-      version: v6.0.0
+      app: my-cas-v1
   template:
     metadata:
       labels:
-        app: my-cas
-        version: v6.0.0
+        app: my-cas-v1
     spec:
       containers:
-      - name: my-cas
+      - name: my-cas-v1
         image: containersol/k8s-deployment-strategies
         ports:
         - name: http
